@@ -1,14 +1,12 @@
-package org.pwr.dataaccess.in.impl;
+package org.pwr.dataaccess.file.impl;
 
-import org.pwr.dataaccess.in.FileReader;
+import org.pwr.dataaccess.file.FileReader;
 
-import javax.inject.Named;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-@Named
 public class FileReaderImpl implements FileReader {
 
     public List<String> readFromFile(String fileName)
@@ -23,7 +21,7 @@ public class FileReaderImpl implements FileReader {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred!");
+            System.out.println("File " + fileName + " is not found!");
             System.out.println(e.getMessage());
         }
         return lines;

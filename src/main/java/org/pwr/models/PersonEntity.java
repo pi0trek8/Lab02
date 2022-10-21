@@ -1,5 +1,6 @@
 package org.pwr.models;
 
+import org.pwr.common.Jug;
 import org.pwr.eto.JugEto;
 import org.pwr.eto.PersonEto;
 
@@ -7,19 +8,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class PersonEntity {
-
     private long id;
     private List<Integer> flavours;
     private int satisfaction;
-    private int dissatisfaction = 400;
-    private Map<Long, Integer> jugIdToVolume = new HashMap<>();
-    private Map<Long, Integer> flavourToVolume = new HashMap<>();
-
+    private int dissatisfaction;
+    private final Map<Long, Integer> jugIdToVolume = new HashMap<>();
     private final List<JugEto> assignedJugs = new ArrayList<>();
 
     public PersonEntity(PersonEto personEto) {
         this.id = personEto.getId();
         this.flavours = personEto.getFlavourPreferencesList();
+        satisfaction = 0;
+        dissatisfaction = 400;
     }
 
     public long getId() {
@@ -42,10 +42,6 @@ public class PersonEntity {
         return jugIdToVolume;
     }
 
-    public void setJugIdToVolume(Map<Long, Integer> jugIdToVolume) {
-        this.jugIdToVolume = jugIdToVolume;
-    }
-
     public List<Integer> getFlavours() {
         return flavours;
     }
@@ -62,13 +58,28 @@ public class PersonEntity {
         return assignedJugs;
     }
 
-    public void addToMap(Long jugId, Integer volume, Integer flavour) {
+    public void minimizeDissatisfaction(Long jugId, Integer volume, Integer flavour) {
         int weight = flavours.size() - flavours.indexOf(flavour);
-        this.satisfaction += weight * volume;
-        if (flavours.indexOf(flavour) == 0) {
-            dissatisfaction = Math.max(400 - volume, 0);
-        }
+        satisfaction += weight * volume;
+        dissatisfaction = Math.max(400 - volume, 0);
         jugIdToVolume.put(jugId, volume );
+    }
+
+    public void pour(Integer flavour, int volume) {
+        var jug = this.assignedJugs.stream()
+                        .filter(juice -> Objects.equals(juice.getFlavour(), flavour))
+                        .findFirst()
+                        .get();
+
+        int weight = flavours.size() - flavours.indexOf(jug.getFlavour());
+        satisfaction += weight * volume;
+        jug.pourOut(volume);
+
+        if (jugIdToVolume.containsKey(jug.getId())) {
+            int addedVolume = jugIdToVolume.get(jug.getId());
+            volume += addedVolume;
+        }
+        jugIdToVolume.put(jug.getId(), volume);
     }
 
     @Override
@@ -78,18 +89,8 @@ public class PersonEntity {
                 ", flavours=" + flavours +
                 ", satisfaction=" + satisfaction +
                 ", dissatisfaction=" + dissatisfaction +
-                ", jugIdToVolume=" + jugIdToVolume +
                 ",\n assignedJugs=" + assignedJugs.stream().map(JugEto::toString).collect(Collectors.toList()) +
-                "flavourToVolume = " + flavourToVolume +
+                "flavourToVolume = " + jugIdToVolume +
                 "}\n\n\n\n";
-    }
-
-    public void pour(Integer flavour, int volume) {
-        var jug = this.assignedJugs.stream().filter(juice -> Objects.equals(juice.getFlavour(), flavour)).findFirst();
-        int weight = flavours.size() - assignedJugs.indexOf(jug.get());
-        satisfaction += weight * volume;
-        jug.get().pourOut(volume);
-
-        flavourToVolume.put(jug.get().getId(), volume);
     }
 }

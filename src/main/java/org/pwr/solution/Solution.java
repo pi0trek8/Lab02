@@ -6,27 +6,27 @@ import java.util.List;
 
 public class Solution {
 
-    List<PersonEntity> peopleResult;
-    Integer totalSatisfaction = 0;
-    Integer totalDissatisfaction = 0;
+    private List<PersonEntity> results;
+    private Integer totalSatisfaction = 0;
+    private Integer totalDissatisfaction = 0;
 
-    public List<PersonEntity> getPeopleResult() {
-        return peopleResult;
+    public List<PersonEntity> getResults() {
+        return results;
     }
 
-    public void setPeopleResult(List<PersonEntity> peopleResult) {
-        this.peopleResult = peopleResult;
+    public void setResults(List<PersonEntity> results) {
+        this.results = results;
     }
 
     public void calculateSatisfaction() {
-        peopleResult.forEach(personEntity -> {
+        results.forEach(personEntity -> {
                     totalSatisfaction += personEntity.getSatisfaction();
                 }
         );
     }
 
     public void calculateTotalDissatisfaction() {
-        peopleResult.forEach(personEntity -> {
+        results.forEach(personEntity -> {
                     totalDissatisfaction += personEntity.getDissatisfaction();
                 }
         );
@@ -35,7 +35,7 @@ public class Solution {
     @Override
     public String toString() {
         return "Solution{" +
-                "peopleResult=" + peopleResult +
+                "peopleResult=" + results +
                 ", totalSatisfaction=" + totalSatisfaction +
                 ", totalDissatisfaction=" + totalDissatisfaction + '}' +
                 ",\n\n satisfaction - dissatisfaction = "+ (totalSatisfaction-totalDissatisfaction);

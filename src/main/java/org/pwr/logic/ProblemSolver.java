@@ -2,7 +2,6 @@ package org.pwr.logic;
 
 import org.pwr.eto.JugEto;
 import org.pwr.eto.PersonEto;
-import org.pwr.models.Flavour;
 import org.pwr.models.PersonEntity;
 import org.pwr.problem.Problem;
 import org.pwr.solution.Solution;
@@ -13,9 +12,9 @@ import java.util.stream.Collectors;
 public class ProblemSolver {
     public static Solution solve(Problem problem) {
 
-        var people = problem.getPeople();
+        List<PersonEto> people = problem.getPeople();
 
-        var jugs = problem.getJugs();
+        List<JugEto> jugs = problem.getJugs();
 
         var sortedPeopleByAmountOfPreferences = sortByPreferencesLength(people);
 
@@ -36,10 +35,10 @@ public class ProblemSolver {
             if (jug.isPresent()) {
                 JugEto currentJug = jug.get();
                 if (currentJug.getVolume() >= 400) {
-                    person.addToMap(currentJug.getId(), 400, currentJug.getFlavour());
+                    person.minimizeDissatisfaction(currentJug.getId(), 400, currentJug.getFlavour());
                     currentJug.pourOut(400);
                 } else {
-                    person.addToMap(currentJug.getId(), currentJug.getVolume(), currentJug.getFlavour());
+                    person.minimizeDissatisfaction(currentJug.getId(), currentJug.getVolume(), currentJug.getFlavour());
                     currentJug.pourOut(currentJug.getVolume());
                     jugs.remove(currentJug);
                 }
@@ -89,9 +88,15 @@ public class ProblemSolver {
             }
         }
 
+        for (JugEto jug : usedJugs) {
+            if (jug.getVolume() > 0) {
+                jug.getPeople().get(0).pour(jug.getFlavour(), jug.getVolume());
+            }
+        }
+
 
         Solution solution = new Solution();
-        solution.setPeopleResult(personEntities);
+        solution.setResults(personEntities);
         solution.calculateSatisfaction();
         solution.calculateTotalDissatisfaction();
 
@@ -105,32 +110,22 @@ public class ProblemSolver {
                 .filter(juice -> juice.getNumberOfAssignedPeople() == 0)
                 .max(Comparator.comparing(JugEto::getVolume));
 
-        if (jugOptional.isPresent()) {
-            return jugOptional;
-        }
-        jugOptional = filteredJugs.stream()
-                .max(Comparator.comparing(juice -> juice.getVolume() / juice.getNumberOfAssignedPeople()));
+        return jugOptional.isPresent()
+                ? jugOptional
+                : filteredJugs.stream()
+                        .max(Comparator.comparing(juice -> juice.getVolume() / juice.getNumberOfAssignedPeople()));
+    }
 
-        return jugOptional;
+    private static Optional<JugEto> findEmptyJug(List<JugEto> jugs) {
+        return jugs.stream()
+                .filter(juice -> juice.getNumberOfAssignedPeople() == 0)
+                .max(Comparator.comparing(JugEto::getVolume));
     }
 
     private static List<PersonEto> sortByPreferencesLength(List<PersonEto> people) {
         return people.stream()
                 .sorted(Comparator.comparing(PersonEto::getNumberOfPreferences).reversed())
                 .collect(Collectors.toList());
-    }
-
-    private static Map<Integer, List<JugEto>> countSameFlavours(Set<Flavour> flavours, List<JugEto> jugs) {
-        Map<Integer, List<JugEto>> flavourIdToJugs = new HashMap<>();
-
-        for (var flavour : flavours) {
-            var specificFlavourJugs = jugs.stream()
-                    .filter(jug -> jug.getFlavour().equals(flavour.getFlavourId()))
-                    .collect(Collectors.toList());
-
-            flavourIdToJugs.put(flavour.getFlavourId(), specificFlavourJugs);
-        }
-        return flavourIdToJugs;
     }
 
     private static int getFlavourWeight(JugEto jug) {

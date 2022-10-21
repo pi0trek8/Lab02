@@ -1,7 +1,6 @@
 package org.pwr.eto;
 
 import org.pwr.common.Jug;
-import org.pwr.models.Flavour;
 import org.pwr.models.PersonEntity;
 
 import java.util.ArrayList;
@@ -19,12 +18,13 @@ public class JugEto implements Jug {
 
     private Integer portion;
 
-    private final List<PersonEntity> people = new ArrayList<>();
+    private final List<PersonEntity> people;
 
-    public JugEto(long id,  Integer flavour, int volume) {
+    public JugEto(long id, Integer flavour, int volume) {
         this.id = id;
         this.flavour = flavour;
         this.volume = volume;
+        people = new ArrayList<>();
     }
 
     @Override
