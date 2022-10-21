@@ -73,7 +73,7 @@ public class ProblemSolver {
                 .filter(jug -> jug.getNumberOfAssignedPeople() > 0)
                 .collect(Collectors.toList());
 
-        for(JugEto jug : usedJugs) {
+        for (JugEto jug : usedJugs) {
             int weight = getFlavourWeight(jug);
 
             int portion = jug.getVolume() / weight;
@@ -85,7 +85,7 @@ public class ProblemSolver {
             for (PersonEntity person : jug.getPeople()) {
                 int weight = person.getFlavours().size() - person.getFlavours().indexOf(jug.getFlavour());
 
-                person.pour(jug.getFlavour(), jug.getPortion()*weight);
+                person.pour(jug.getFlavour(), jug.getPortion() * weight);
             }
         }
 
@@ -100,7 +100,7 @@ public class ProblemSolver {
         return solution;
     }
 
-    public static Optional<JugEto> findBestJug(List<JugEto> filteredJugs, PersonEntity person) {
+    private static Optional<JugEto> findBestJug(List<JugEto> filteredJugs, PersonEntity person) {
         Optional<JugEto> jugOptional = filteredJugs.stream()
                 .filter(juice -> juice.getNumberOfAssignedPeople() == 0)
                 .max(Comparator.comparing(JugEto::getVolume));
@@ -114,13 +114,13 @@ public class ProblemSolver {
         return jugOptional;
     }
 
-    public static List<PersonEto> sortByPreferencesLength(List<PersonEto> people) {
+    private static List<PersonEto> sortByPreferencesLength(List<PersonEto> people) {
         return people.stream()
                 .sorted(Comparator.comparing(PersonEto::getNumberOfPreferences).reversed())
                 .collect(Collectors.toList());
     }
 
-    public static Map<Integer, List<JugEto>> countSameFlavours(Set<Flavour> flavours, List<JugEto> jugs) {
+    private static Map<Integer, List<JugEto>> countSameFlavours(Set<Flavour> flavours, List<JugEto> jugs) {
         Map<Integer, List<JugEto>> flavourIdToJugs = new HashMap<>();
 
         for (var flavour : flavours) {
@@ -135,7 +135,7 @@ public class ProblemSolver {
 
     private static int getFlavourWeight(JugEto jug) {
         int weight = 0;
-        for(PersonEntity person : jug.getPeople()) {
+        for (PersonEntity person : jug.getPeople()) {
             weight += (person.getFlavours().size() - person.getFlavours().indexOf(jug.getFlavour()));
         }
         return weight;

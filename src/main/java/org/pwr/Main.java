@@ -7,9 +7,8 @@ import org.pwr.service.impl.FileServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        String fileToJugs = "C:\\repository\\java-cheatsheet\\lab02\\src\\jugs.txt";
-        String fileToPeople = "C:\\repository\\java-cheatsheet\\lab02\\src\\people.txt";
+        String fileToJugs = "src/jugs.txt";
+        String fileToPeople = "src/people.txt";
 
         FileService service = new FileServiceImpl();
 //        service.getJugs(fileToJugs).forEach(System.out::println);

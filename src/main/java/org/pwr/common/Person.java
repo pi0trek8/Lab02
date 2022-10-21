@@ -8,5 +8,5 @@ public interface Person {
 
     long getId();
 
-    List<Flavour> getFlavourPreferences();
+    int getNumberOfPreferences();
 }

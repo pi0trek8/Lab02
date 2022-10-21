@@ -1,12 +1,13 @@
 package org.pwr.eto;
 
+import org.pwr.common.Person;
 import org.pwr.models.Flavour;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PersonEto {
+public class PersonEto implements Person {
 
     private final long id;
     private final List<Integer> flavourPreferencesList;

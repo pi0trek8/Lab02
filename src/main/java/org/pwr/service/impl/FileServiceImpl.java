@@ -17,7 +17,6 @@ public class FileServiceImpl extends AbstractMapper implements FileService {
 //    @Inject
     private final DataAccess dataAccess = new DataAccessImpl(new FileReaderImpl(), new FileWriterImpl());
 
-
     @Override
     public List<JugEto> getJugs(String fileName) {
         List<String> dataFromFile = dataAccess.readFromFile(fileName);
