@@ -79,12 +79,11 @@ public class ProblemSolver {
             jug.setPortion(portion);
         }
 
-
-        for (JugEto jug : usedJugs) {
-            for (PersonEntity person : jug.getPeople()) {
+        for(PersonEntity person : personEntities ) {
+            for (JugEto jug : person.getAssignedJugs()) {
                 int weight = person.getFlavours().size() - person.getFlavours().indexOf(jug.getFlavour());
-
                 person.pour(jug.getFlavour(), jug.getPortion() * weight);
+
             }
         }
 
@@ -93,7 +92,6 @@ public class ProblemSolver {
                 jug.getPeople().get(0).pour(jug.getFlavour(), jug.getVolume());
             }
         }
-
 
         Solution solution = new Solution();
         solution.setResults(personEntities);
@@ -106,17 +104,15 @@ public class ProblemSolver {
     }
 
     private static Optional<JugEto> findBestJug(List<JugEto> filteredJugs, PersonEntity person) {
-        Optional<JugEto> jugOptional = filteredJugs.stream()
-                .filter(juice -> juice.getNumberOfAssignedPeople() == 0)
-                .max(Comparator.comparing(JugEto::getVolume));
+        Optional<JugEto> notUsedJugOptional = findNotUsedJug(filteredJugs);
 
-        return jugOptional.isPresent()
-                ? jugOptional
+        return notUsedJugOptional.isPresent()
+                ? notUsedJugOptional
                 : filteredJugs.stream()
                         .max(Comparator.comparing(juice -> juice.getVolume() / juice.getNumberOfAssignedPeople()));
     }
 
-    private static Optional<JugEto> findEmptyJug(List<JugEto> jugs) {
+    private static Optional<JugEto> findNotUsedJug(List<JugEto> jugs) {
         return jugs.stream()
                 .filter(juice -> juice.getNumberOfAssignedPeople() == 0)
                 .max(Comparator.comparing(JugEto::getVolume));
