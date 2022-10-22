@@ -1,14 +1,10 @@
-package org.pwr.dataaccess.out.impl;
+package org.pwr.dataaccess.writefile.impl;
 
-import org.pwr.dataaccess.out.FileWriter;
+import org.pwr.dataaccess.writefile.FileWriter;
 
-import javax.inject.Named;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
-@Named
 public class FileWriterImpl implements FileWriter {
 
     @Override

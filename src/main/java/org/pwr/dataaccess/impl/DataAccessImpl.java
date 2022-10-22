@@ -1,8 +1,8 @@
 package org.pwr.dataaccess.impl;
 
 import org.pwr.dataaccess.DataAccess;
-import org.pwr.dataaccess.file.FileReader;
-import org.pwr.dataaccess.out.FileWriter;
+import org.pwr.dataaccess.readfile.FileReader;
+import org.pwr.dataaccess.writefile.FileWriter;
 
 import java.util.List;
 

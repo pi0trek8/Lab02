@@ -2,8 +2,8 @@ package org.pwr.service.impl;
 
 import org.pwr.dataaccess.DataAccess;
 import org.pwr.dataaccess.impl.DataAccessImpl;
-import org.pwr.dataaccess.file.impl.FileReaderImpl;
-import org.pwr.dataaccess.out.impl.FileWriterImpl;
+import org.pwr.dataaccess.readfile.impl.FileReaderImpl;
+import org.pwr.dataaccess.writefile.impl.FileWriterImpl;
 import org.pwr.eto.JugEto;
 import org.pwr.eto.PersonEto;
 import org.pwr.mapper.AbstractMapper;

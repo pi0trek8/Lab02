@@ -1,4 +1,4 @@
-package org.pwr.dataaccess.file;
+package org.pwr.dataaccess.readfile;
 
 import java.util.List;
 

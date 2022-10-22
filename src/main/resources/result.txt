@@ -1,4 +1,4 @@
-Dane osoby                        Lista par ([id dzbanka, przydzielona iloÅ›Ä‡ napoju])
+Dane osoby                        Lista par ([id dzbanka, przydzielona iloœæ napoju])
 
 Person {id = 1                    ([3, 321], [6, 1576])
 flavours = [1, 2]

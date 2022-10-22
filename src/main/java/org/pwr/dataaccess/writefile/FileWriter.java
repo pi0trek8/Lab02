@@ -1,9 +1,6 @@
-package org.pwr.dataaccess.out;
+package org.pwr.dataaccess.writefile;
 
-import javax.inject.Named;
-import java.util.List;
 
-@Named
 public interface FileWriter {
 
     void writeToFile(String fileName, String results);

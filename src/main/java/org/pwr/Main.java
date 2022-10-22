@@ -1,3 +1,16 @@
+/**
+ * @author Piotr Szczypior 26648
+ *
+ * @jar - using maven build tool
+ * mvn package
+ *
+ * @run-jar
+ * java -jar lab02_pop.jar
+ *
+ * @comment
+ * Apart from printing the result to console,
+ * program will additionally save result into lab02Result.txt file in the same directory as jar
+ */
 package org.pwr;
 
 import org.pwr.problem.Problem;
@@ -7,9 +20,10 @@ import org.pwr.service.impl.FileServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        String fileToJugs = "src/main/resources/jugs.txt";
-        String fileToPeople = "src/main/resources/people.txt";
-        String resultFile = "src/main/resources/result.txt";
+        String fileToJugs = "/jugs.txt";
+        String fileToPeople = "/people.txt";
+        var currentJarLocation = System.getProperty("user.dir");
+        String resultFile = currentJarLocation + "/Lab02Result.txt";
 
         FileService service = new FileServiceImpl();
         Problem problem = new Problem();

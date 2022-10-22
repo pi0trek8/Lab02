@@ -1,0 +1,17 @@
+org\pwr\solution\Solution.class
+org\pwr\dataaccess\file\impl\FileReaderImpl.class
+org\pwr\logic\ProblemSolver.class
+org\pwr\eto\PersonEto.class
+org\pwr\dataaccess\out\FileWriter.class
+org\pwr\dataaccess\impl\DataAccessImpl.class
+org\pwr\models\PersonEntity.class
+org\pwr\problem\Problem.class
+org\pwr\mapper\AbstractMapper.class
+org\pwr\Main.class
+org\pwr\service\impl\FileServiceImpl.class
+module-info.class
+org\pwr\dataaccess\out\impl\FileWriterImpl.class
+org\pwr\dataaccess\file\FileReader.class
+org\pwr\eto\JugEto.class
+org\pwr\dataaccess\DataAccess.class
+org\pwr\service\FileService.class
