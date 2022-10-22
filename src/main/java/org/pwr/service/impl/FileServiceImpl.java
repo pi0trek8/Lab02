@@ -38,9 +38,7 @@ public class FileServiceImpl extends AbstractMapper implements FileService {
     }
 
     @Override
-    public boolean saveResults(String fileName, List<Object> results) {
-
-
-        return false;
+    public void saveResults(String fileName, String results) {
+        dataAccess.writeToFile(fileName, results);
     }
 }

@@ -1,11 +1,10 @@
 package org.pwr.eto;
 
-import org.pwr.common.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonEto implements Person {
+public class PersonEto {
 
     private final long id;
     private final List<Integer> flavourPreferencesList;

@@ -11,6 +11,6 @@ public interface FileService {
 
     List<PersonEto> getPeople(String fileName);
 
-    boolean saveResults(String fileName, List<Object> results);
+    void saveResults(String fileName, String results);
 
 }

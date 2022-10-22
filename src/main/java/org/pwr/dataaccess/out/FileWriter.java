@@ -6,5 +6,5 @@ import java.util.List;
 @Named
 public interface FileWriter {
 
-    void writeToFile(String fileName, List<String> data);
+    void writeToFile(String fileName, String results);
 }

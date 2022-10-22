@@ -1,0 +1,63 @@
+Dane osoby                        Lista par ([id dzbanka, przydzielona ilość napoju])
+
+Person {id = 1                    ([3, 321] ; [6, 1576])
+flavours = [1, 2]
+satisfaction = 3473
+dissatisfaction = 0}
+
+
+Person {id = 2                    ([6, 984])
+flavours = [1]
+satisfaction = 984
+dissatisfaction = 0}
+
+
+Person {id = 3                    ([1, 797] ; [4, 1244] ; [6, 584])
+flavours = [3, 2, 1]
+satisfaction = 5910
+dissatisfaction = 0}
+
+
+Person {id = 4                    ([6, 984])
+flavours = [1]
+satisfaction = 984
+dissatisfaction = 0}
+
+
+Person {id = 5                    ([3, 1042] ; [6, 584])
+flavours = [2, 1]
+satisfaction = 2668
+dissatisfaction = 0}
+
+
+Person {id = 6                    ([5, 1012] ; [6, 584])
+flavours = [2, 1]
+satisfaction = 2608
+dissatisfaction = 0}
+
+
+Person {id = 7                    ([1, 398] ; [2, 1075] ; [6, 1168])
+flavours = [3, 1, 2]
+satisfaction = 5959
+dissatisfaction = 0}
+
+
+Person {id = 8                    ([6, 984])
+flavours = [1]
+satisfaction = 984
+dissatisfaction = 0}
+
+
+Person {id = 9                    ([6, 984])
+flavours = [1]
+satisfaction = 984
+dissatisfaction = 0}
+
+
+Person {id = 10                    ([5, 306] ; [6, 1568])
+flavours = [1, 2]
+satisfaction = 3442
+dissatisfaction = 0}
+
+total satisfaction = 27996, total dissatisfaction = 0
+satisfaction - dissatisfaction = 27996

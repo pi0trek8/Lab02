@@ -23,8 +23,8 @@ public class DataAccessImpl implements DataAccess {
     }
 
     @Override
-    public void writeToFile(String fileName, List<String> data) {
-        fileWriter.writeToFile(fileName, data);
+    public void writeToFile(String fileName, String results) {
+        fileWriter.writeToFile(fileName, results);
     }
 
 

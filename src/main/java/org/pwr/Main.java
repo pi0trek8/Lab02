@@ -7,23 +7,19 @@ import org.pwr.service.impl.FileServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        String fileToJugs = "src/jugs.txt";
-        String fileToPeople = "src/people.txt";
+        String fileToJugs = "src/main/resources/jugs.txt";
+        String fileToPeople = "src/main/resources/people.txt";
+        String resultFile = "src/main/resources/result.txt";
 
         FileService service = new FileServiceImpl();
-//        service.getJugs(fileToJugs).forEach(System.out::println);
-//        System.out.println("------------------------------");
-//        service.getPeople(fileToPeople).forEach(System.out::println);
-
-//        var list = ProblemSolver.sortByPreferencesLength(service.getPeople(fileToPeople));
-
-//        list.forEach(System.out::println);
         Problem problem = new Problem();
         problem.setJugs(service.getJugs(fileToJugs));
         problem.setPeople(service.getPeople(fileToPeople));
 
         var solution = ProblemSolver.solve(problem);
+        String solutionString = solution.toString();
+        System.out.println(solutionString);
 
-        System.out.println(solution);
+        service.saveResults(resultFile, solutionString);
     }
 }

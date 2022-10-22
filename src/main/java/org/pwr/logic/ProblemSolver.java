@@ -98,8 +98,6 @@ public class ProblemSolver {
         solution.calculateSatisfaction();
         solution.calculateTotalDissatisfaction();
 
-        System.out.println(jugs);
-
         return solution;
     }
 
